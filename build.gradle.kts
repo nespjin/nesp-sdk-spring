@@ -8,16 +8,14 @@ group = "com.nesp"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    maven {
-        setUrl("https://maven.aliyun.com/nexus/content/groups/public/")
-    }
-    maven {
-        setUrl("https://maven.aliyun.com/nexus/content/repositories/jcenter")
-    }
-
+    maven { url = uri("https://maven.aliyun.com/repository/public") }
+    maven { url = uri("https://maven.aliyun.com/nexus/content/groups/public/") }
+    maven { url = uri("https://maven.aliyun.com/nexus/content/repositories/jcenter") }
     maven { url = uri("https://jitpack.io") }
-    mavenCentral()
 
+    gradlePluginPortal()
+    google()
+    mavenCentral()
 }
 
 dependencies {
