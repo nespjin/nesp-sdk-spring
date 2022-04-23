@@ -1,7 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm")/* version "1.6.20"*/
+    id("org.springframework.boot") /*version "3.0.0-SNAPSHOT"*/
+    id("io.spring.dependency-management") /*version "1.0.11.RELEASE"*/
+    kotlin("jvm") /*version "1.6.21"*/
+    kotlin("plugin.spring") /*version "1.6.21"*/
 }
 
 group = "com.nesp"
@@ -20,6 +23,11 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+
+    implementation(project(":nesp-sdk-kotlin"))
+    implementation(project(":nesp-sdk-java"))
+    implementation("com.google.code.gson:gson:2.9.0")
+    implementation("org.springframework.boot:spring-boot-starter-web")
 }
 
 tasks.test {
