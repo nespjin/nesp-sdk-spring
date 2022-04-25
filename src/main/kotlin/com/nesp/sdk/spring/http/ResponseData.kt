@@ -47,6 +47,12 @@ open class ResponseData<T> : Serializable {
         this.success = code == HttpStatus.OK.value()
     }
 
+    constructor(httpStatus: HttpStatus, msg: String) {
+        this.code = httpStatus.value()
+        this.msg = msg
+        this.success = httpStatus.value() == HttpStatus.OK.value()
+    }
+
     constructor(httpStatus: HttpStatus) {
         this.code = httpStatus.value()
         this.msg = httpStatus.reasonPhrase
