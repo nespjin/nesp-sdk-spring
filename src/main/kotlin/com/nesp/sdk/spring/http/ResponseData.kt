@@ -70,4 +70,20 @@ open class ResponseData<T> : Serializable {
         return GsonBuilder().setPrettyPrinting().create().toJson(this)
     }
 
+    companion object {
+        fun <T> fromResult(result: Result<T>): ResponseData<T> {
+            if (result.isFailure) {
+                if (result.exceptionOrNull() is IllegalArgumentException) {
+                    return ResponseData(HttpStatus.BAD_REQUEST.value(), result.exceptionOrNull()?.message.orEmpty())
+                }
+
+                return ResponseData(
+                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                    result.exceptionOrNull()?.message.orEmpty()
+                )
+            }
+
+            return ResponseData(HttpStatus.OK, result.getOrNull())
+        }
+    }
 }
